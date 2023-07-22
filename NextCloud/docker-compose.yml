@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  nextcloud:
+    image: nextcloud:production
+    container_name: nextcloud
+    environment:
+      - PUID=1000
+      - PGID=1000
+      #- TZ=America/Argentina
+      - MYSQL_ROOT_PASSWORD=Contraseña_Root_de_MariaDB #Contraseña de root de mariadb
+      - MYSQL_PASSWORD=Contraseña_de_MariaDB #Contraseña del usuario de la base de datos
+      - MYSQL_DATABASE=DatabaseDeMariaDB #Nombre de la base de datos
+      - MYSQL_USER=UsuarioDeMariaBD #Usuario de la base de datos
+      - MYSQL_HOST=mariadb #Nombre del contenedor de mariadb
+    volumes:
+      - ./nextcloud/config:/var/www/html/config # Configuracion de nextcloud
+      - ./nextcloud/data:/var/www/html/data # Datos de nextcloud
+    ports:
+      - 8080:80 #Puertos de acceso a la interfaz web. El primero es el puerto de la maquina host, el segundo es el puerto del contenedor
+    depends_on:
+      - mariadb
+      - duckdns
+    restart: unless-stopped
+  
+  mariadb:
+    image: linuxserver/mariadb
+    container_name: mariadb
+    environment:
+      - PUID=1000
+      - PGID=1000
+      #- TZ=America/Argentina
+      - MYSQL_ROOT_PASSWORD=Contraseña_Root_de_MariaDB #Contraseña de root de mariadb
+      - MYSQL_PASSWORD=Contraseña_de_MariaDB #Contraseña del usuario de la base de datos
+      - MYSQL_DATABASE=DatabaseDeMariaDB #Nombre de la base de datos
+      - MYSQL_USER=UsuarioDeMariaBD #Usuario de la base de datos
+      - MYSQL_HOST=mariadb #Nombre del contenedor de mariadb
+    volumes:
+      - ./mariadb/config:/etc/mysql/conf.d
+      - ./mariadb:/var/lib/mysql
+    ports:
+      - 3306:3306
+    restart: unless-stopped
+
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    container_name: duckdns
+    environment:
+      - PUID=1000 #optional
+      - PGID=1000 #optional
+      #- TZ=America/Argentina #optional
+      - SUBDOMAINS=Subdominio_de_DuckDNS #subdominio de duckdns, separados por comas
+      - TOKEN=Token_de_DuckDNS #token de duckdns
+      - LOG_FILE=false #optional
+    volumes:
+      - ./duckdns:/config #optional
+    restart: unless-stopped
