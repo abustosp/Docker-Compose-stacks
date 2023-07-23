@@ -16,8 +16,8 @@
 
 ## Para que Nextcloud escanee los cambios en los archivos
 
-```docker exec -u www-data -it ConteinerIDdeDocker php occ files:scan --all```
+`docker exec -u www-data -it ConteinerIDdeDocker php occ files:scan --all`
 <br>o<br>
-```docker exec -ti --user www-data ConteinerIDdeDocker /var/www/html/occ files:scan --all```
+`docker exec -ti --user www-data ConteinerIDdeDocker /var/www/html/occ files:scan --all`
 
 
