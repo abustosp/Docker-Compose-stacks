@@ -37,7 +37,7 @@ services:
       - MYSQL_HOST=mariadb #Nombre del contenedor de mariadb
     volumes:
       - ./mariadb/config:/etc/mysql/conf.d
-      - ./mariadb:/var/lib/mysql
+      - ./mariadb/data:/var/lib/mysql
     ports:
       - 3306:3306
     restart: unless-stopped
@@ -52,6 +52,6 @@ services:
       - SUBDOMAINS=Subdominio_de_DuckDNS #subdominio de duckdns, separados por comas
       - TOKEN=Token_de_DuckDNS #token de duckdns
       - LOG_FILE=false #optional
-    volumes:
-      - ./duckdns:/config #optional
+    #volumes:
+    #  - ./duckdns:/config #optional
     restart: unless-stopped
