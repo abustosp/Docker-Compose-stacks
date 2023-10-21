@@ -1,0 +1,39 @@
+version: "3"
+
+services:
+  flarum:
+    image: mondedie/flarum:stable
+    container_name: flarum_core
+    environment:
+      - DEBUG=false
+      - FORUM_URL=localhost:8888
+      - DB_HOST=mariadb
+      - DB_NAME=flarum
+      - DB_USER=flarum
+      - DB_PASS=blablabla
+      - DB_PREF=flarum_
+      - DB_PORT=3306
+      - FLARUM_ADMIN_USER=Administrador
+      - FLARUM_ADMIN_PASS=Administrador
+      - FLARUM_ADMIN_MAIL=Administrador@hotmail.com
+      - FLARUM_TITLE=Contadores Cracks
+    volumes:
+      - ./root/dt-applications/flarum/assets:/flarum/app/public/assets
+      - ./root/dt-applications/flarum/extensions:/flarum/app/extensions
+      - ./root/dt-applications/flarum/storage/logs:/flarum/app/storage/logs
+      - ./root/dt-applications/flarum/nginx:/etc/nginx/flarum
+    ports:
+      - 8888:8888
+    depends_on:
+      - mariadb
+
+  mariadb:
+    image: mysql:5.7
+    container_name: flarum_mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=blablabla
+      - MYSQL_DATABASE=flarum
+      - MYSQL_USER=flarum
+      - MYSQL_PASSWORD=blablabla
+    volumes:
+      - ./root/dt-applications/flarum/mysql:/var/lib/mysql
