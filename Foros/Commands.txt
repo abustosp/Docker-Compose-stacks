@@ -1,0 +1,25 @@
+Inicio de comando para actualizar:
+docker exec -ti flarum_core extension require
+
+Extension recomendada por flarum (no probado):
+docker exec -ti flarum_core extension require symfony/mailer -W
+
+Extensiones a mirar
+docker exec -ti flarum_core extension require fof/oauth -W
+
+Extensiones a instalar:
+docker exec -ti flarum_core extension require flarum-lang/spanish --with-all-dependencies
+docker exec -ti flarum_core extension require v17development/flarum-blog --with-all-dependencies
+docker exec -ti flarum_core extension require fof/polls --with-all-dependencies
+docker exec -ti flarum_core extension require fof/upload "*" --with-all-dependencies
+docker exec -ti flarum_core extension require fof/pages --with-all-dependencies
+docker exec -ti flarum_core extension require
+
+
+Desde docker exec:
+extension -W require flarum-lang/spanish
+extension -W require v17development/flarum-blog
+extension -W require fof/polls
+extension -W require fof/upload "*"
+extension -W require fof/pages
+
