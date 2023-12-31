@@ -12,3 +12,12 @@ services:
     ports:
       - 3306:3306
     restart: unless-stopped
+
+  duckdns:
+    image: lscr.io/linuxserver/duckdns:latest
+    container_name: duckdns
+    env_file:
+      - duckdns.env
+    #volumes:
+    #  - ./duckdns:/config #optional
+    restart: unless-stopped
