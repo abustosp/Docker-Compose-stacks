@@ -5,15 +5,8 @@ services:
   BaseDeDatos:
     image: linuxserver/mariadb:10.11.5
     container_name: BaseDeDatosTest
-    environment:
-      #- PUID=1000
-      #- PGID=1000
-      #- TZ=America/Argentina
-      - MYSQL_ROOT_PASSWORD=rootpassword #Contraseña de root de mariadb
-      - MYSQL_PASSWORD=password #Contraseña del usuario de la base de datos
-      - MYSQL_DATABASE=database #Nombre de la base de datos
-      - MYSQL_USER=user #Usuario de la base de datos
-      - MYSQL_HOST=BaseDeDatosTest #Nombre del contenedor de mariadb
+    env_file:
+      - mariadb.env
     volumes:
       - ./MariaDB:/config
     ports:
