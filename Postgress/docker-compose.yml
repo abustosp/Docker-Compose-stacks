@@ -14,7 +14,7 @@ services:
 
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
-    container_name: duckdns
+    container_name: postgres-duckdns
     env_file:
       - duckdns.env
     #volumes:
