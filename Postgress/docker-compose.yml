@@ -10,6 +10,7 @@ services:
       - ./postgresData:/var/lib/postgresql/data
     env_file:
       - postgres.env
+    restart: unless-stopped
 
   duckdns:
     image: lscr.io/linuxserver/duckdns:latest
