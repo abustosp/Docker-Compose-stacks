@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Contraseña_segura
+      - MSSQL_PID=Express
+    ports:
+      - 1433:1433
