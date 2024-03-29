@@ -1,5 +1,7 @@
-version: "3"
+
 services:
+
+
   jellyfin:
     image: jellyfin/jellyfin
     container_name: jellyfin
@@ -15,6 +17,7 @@ services:
     ports:
       - 8096:8096
     restart: unless-stopped
+
 
   sonarr:
     image: linuxserver/sonarr
@@ -32,6 +35,7 @@ services:
       - 8989:8989
     restart: unless-stopped
 
+
   radarr:
     image: linuxserver/radarr
     container_name: radarr
@@ -46,6 +50,7 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
+
 
   bazarr:
     image: linuxserver/bazarr
@@ -62,6 +67,7 @@ services:
     ports:
       - 6767:6767
     restart: unless-stopped
+
 
   jellyseerr:
     image: fallenbagel/jellyseerr:develop
@@ -81,7 +87,6 @@ services:
       - sonarr
 
 
-
   jackett:
     image: linuxserver/jackett
     container_name: jackett
@@ -97,6 +102,7 @@ services:
       - 9117:9117
     restart: unless-stopped
 
+
   transmission:
     image: linuxserver/transmission
     container_name: transmission
@@ -111,4 +117,14 @@ services:
       - 9091:9091
       - 51413:51413
       - 51413:51413/udp
+    restart: unless-stopped
+    
+    
+  flaresolverr:
+    container_name: flaresolverr
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    ports:
+      - "8191:8191"
+    environment:
+      - LOG_LEVEL=info
     restart: unless-stopped
