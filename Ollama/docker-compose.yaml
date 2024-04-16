@@ -1,5 +1,3 @@
-version: '3.6'
-
 services:
   chatgpt:
     image: ghcr.io/ivanfioravanti/chatbot-ollama:main
