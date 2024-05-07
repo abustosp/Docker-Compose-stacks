@@ -1,0 +1,11 @@
+services:
+  baserow:
+    container_name: baserow
+    image: baserow/baserow:1.24.2
+    env_file:
+      - .env
+    ports:
+      - 8080:80
+      - 8443:443
+    volumes:
+      - ./baserow_data:/baserow/data
