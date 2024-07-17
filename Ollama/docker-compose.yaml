@@ -1,4 +1,5 @@
 services:
+  
   chatgpt:
     image: ghcr.io/ivanfioravanti/chatbot-ollama:main
     ports:
@@ -6,12 +7,24 @@ services:
     environment:
       - DEFAULT_MODEL=llama2
       - OLLAMA_HOST=http://ollama:11434
+  
   ollama:
     image: ollama/ollama:latest
     volumes:
       - ./ollama/models:/ollama/models
     environment:
       - OLLAMA_MODELS=/ollama/models
+
+  open-webui:
+    image: ghcr.io/open-webui/open-webui:main
+    ports:
+      - 3001:8080
+    volumes:
+      - ./open-webui-data:/app/backend/data
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: always
+
 
 # La version actual de chatbot-ollama no descarga el modelo automaticamente
 # Vas a tener que correr este comando cada vez que necesites un modelo nuevo:
