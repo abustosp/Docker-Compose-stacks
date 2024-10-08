@@ -1,0 +1,10 @@
+services:
+
+    sqlitebrowser:
+      image: coleifer/sqlite-web
+      ports:
+        - "Puerto-que-quieras-usar-en-el-host:8080"
+      volumes:
+        - path-de-la-db-de-SQLite:/data
+      environment:
+        - SQLITE_DATABASE="nombre-de-la-db.db"
