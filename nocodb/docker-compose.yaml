@@ -1,0 +1,28 @@
+services: 
+
+  nocodb:
+    image: nocodb/nocodb:latest
+    container_name: nocodb
+    ports: 
+      - "8200:8080"
+    restart: unless-stopped 
+    depends_on: 
+      - db 
+    environment: 
+      NC_DB: "mysql2://db:3306?u=noco&p=password&d=root_db"
+    volumes: 
+      - ./nc_data:/usr/app/data
+
+  db: 
+    image: ghcr.io/linuxserver/mariadb:alpine
+    container_name: nocodb-db
+    restart: unless-stopped
+    environment: 
+      MYSQL_DATABASE: root_db
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: noco
+    volumes: 
+      - ./db_data:/var/lib/mysql
+
+    
