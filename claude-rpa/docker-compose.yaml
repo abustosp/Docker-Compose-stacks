@@ -10,4 +10,5 @@ services:
       - .env
     volumes:
       - ./anthropic:/home/computeruse/.anthropic
+      - ./tmp:/tmp
     tty: true
