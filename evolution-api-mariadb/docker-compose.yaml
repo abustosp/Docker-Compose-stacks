@@ -1,0 +1,28 @@
+services:
+
+  api:
+    container_name: evolution_api
+    image: atendai/evolution-api
+    restart: unless-stopped
+    ports:
+      - 8081:8080
+    volumes:
+      - ./evolution_instances:/evolution/instances
+      - ./evolution_store:/evolution/store
+    env_file:
+      - evolution.env
+    command: ['node', './dist/src/main.js']
+    expose:
+      - 8081
+    depends_on:
+      - mariadbevolution
+
+  mariadbevolution:
+    container_name: evolution_mysql
+    image: mariadb:10.5
+    restart: unless-stopped
+    volumes:
+      - ./evolution_mysql:/var/lib/mysql
+    env_file:
+      - db.env
+    
