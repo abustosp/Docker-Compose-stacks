@@ -1,0 +1,34 @@
+services:
+
+  mariadb:
+    image: bitnami/mariadb:latest
+    container_name: moodle-db
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes 
+      - MARIADB_USER=bn_moodle 
+      - MARIADB_PASSWORD=bitnami
+      - MARIADB_DATABASE=bitnami_moodle
+    volumes:
+      - ./moodle_db:/var/lib/mysql
+
+
+  moodle:
+    image: bitnami/moodle:latest
+    container_name: moodle
+    ports:
+      - "8200:8080"
+      - "8443:8443"
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - MOODLE_DATABASE_USER=bn_moodle 
+      - MOODLE_DATABASE_PASSWORD=bitnami
+      - MOODLE_DATABASE_NAME=bitnami_moodle
+      - MOODLE_USERNAME=usuario
+      - MOODLE_PASSWORD=c0ntr4s3n4      
+    volumes:
+      - ./moodle_data:/bitnami/moodle
+      - ./moodledata_data:/bitnami/moodledata  
+    depends_on:
+      - mariadb      
+     
+      
