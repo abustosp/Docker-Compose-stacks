@@ -1,0 +1,19 @@
+services:
+
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:v5.7
+    expose:
+      - "53"
+      - "67"
+      - "80"
+      - "443"
+    environment:
+      TZ: 'America/Mendoza'
+      WEBPASSWORD: 'Agustin'
+    volumes:
+      - ./etc-pihole/:/etc/pihole/
+      - ./etc-dnsmasq.d/:/etc/dnsmasq.d/
+    cap_add:
+      - NET_ADMIN
+    restart: unless-stopped
