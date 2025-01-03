@@ -1,0 +1,29 @@
+services:
+
+
+  hbbs:
+    image: rustdesk/rustdesk-server
+    container_name: hbbs
+    ports:
+      - "21115:21115"
+      - "21116:21116"
+      - "21116:21116/udp"
+      - "21118:21118"
+    volumes:
+      - .:/root
+    network_mode: "host"  # Utilizan la red del host
+    command: hbbs -r <relay-server-ip[:port]>  # Asegúrate de reemplazar <relay-server-ip[:port]> con el valor correcto ej:192.168.0.10:21117
+    tty: true
+
+
+  hbbr:
+    image: rustdesk/rustdesk-server
+    container_name: hbbr
+    ports:
+      - "21117:21117"
+      - "21119:21119"
+    volumes:
+      - .:/root
+    network_mode: "host"  # Utilizan la red del host
+    command: hbbr
+    tty: true
