@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "8080:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "Admin@hotmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "Admin"
