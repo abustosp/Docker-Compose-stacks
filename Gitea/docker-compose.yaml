@@ -1,0 +1,34 @@
+networks:
+  gitea:
+    external: false
+
+services:
+
+  gitea:
+    image: gitea/gitea:latest
+    container_name: gitea
+    env_file:
+      - gitea.env
+    restart: unless-stopped
+    networks:
+      - gitea
+    volumes:
+      - ./gitea:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:22"
+    depends_on:
+      - gitea-postgres
+
+  gitea-postgres:
+    container_name: gitea-postgres
+    image: postgres:14-alpine
+    restart: always
+    env_file:
+      - db.env
+    networks:
+      - gitea
+    volumes:
+      - ./postgres:/var/lib/postgresql/data
