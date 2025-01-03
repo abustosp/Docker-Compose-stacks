@@ -1,0 +1,10 @@
+services:
+
+  poste:
+    image: analogic/poste.io
+    restart: always
+    network_mode: host
+    volumes:
+      - ./mail-data:/data
+    environment:
+      - HTTPS=ON

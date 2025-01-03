@@ -1,0 +1,27 @@
+services:
+
+  mailserver:
+    image: analogic/poste.io
+    container_name: mailserver
+    restart: unless-stopped
+    network_mode: "host"
+    expose:
+      - "25"
+      - "7080"
+      - "7443"
+      - "110"
+      - "143"
+      - "465"
+      - "587"
+      - "993"
+      - "995"
+    environment:
+      - TZ=America/Argentina/Buenos_Aires
+      - h=mail.mrbot.com.ar # Dirección del servidor de mail hosting
+      - HTTP_PORT=7080
+      - HTTPS_PORT=7443
+      - DISABLE_CLAMAV=FALSE  # TRUE antivirus
+      - DISABLE_RSPAMD=FALSE  # TRUE antispam
+      - DISABLE_ROUNDCUBE=FALSE  # TRUE
+    volumes:
+      - ./mail:/data
