@@ -1,28 +1,33 @@
 services: 
 
-  nocodb:
-    image: nocodb/nocodb:latest
-    container_name: nocodb
-    ports: 
-      - "8200:8080"
-    restart: unless-stopped 
+  nocodb: 
+    image: "nocodb/nocodb:latest"
     depends_on: 
-      - db 
+      - db
+        # condition: service_healthy
     environment: 
-      NC_DB: "mysql2://db:3306?u=noco&p=password&d=root_db"
+      NC_DB: "pg://db:5432?u=postgres&p=password&d=rootdb"
+    ports: 
+      - "8080:8080"
+    restart: always
     volumes: 
-      - ./nc_data:/usr/app/data
-
+      - "nc_data:/usr/app/data"
+  
   db: 
-    image: ghcr.io/linuxserver/mariadb:alpine
-    container_name: nocodb-db
-    restart: unless-stopped
+    image: postgres:16.6
     environment: 
-      MYSQL_DATABASE: root_db
-      MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
-      MYSQL_USER: noco
+      POSTGRES_DB: rootdb
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
+    healthcheck: 
+      interval: 10s
+      retries: 10
+      test: "pg_isready -U \"$$POSTGRES_USER\" -d \"$$POSTGRES_DB\""
+      timeout: 2s
+    restart: always
     volumes: 
-      - ./db_data:/var/lib/mysql
+      - "db_data:/var/lib/postgresql/data"
 
-    
+volumes: 
+  db_data: {}
+  nc_data: {}
