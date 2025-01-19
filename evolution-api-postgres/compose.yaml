@@ -1,5 +1,15 @@
 services:
 
+  postgres:
+    container_name: evolution_postgres
+    image: postgres:13
+    restart: unless-stopped
+    volumes:
+      - ./evolution_postgres:/var/lib/postgresql/data
+    env_file:
+      - db.env
+
+
   api:
     container_name: evolution_api
     image: atendai/evolution-api
@@ -16,13 +26,3 @@ services:
       - 8081
     depends_on:
       - postgres
-
-  postgres:
-    container_name: evolution_postgres
-    image: postgres:13
-    restart: unless-stopped
-    volumes:
-      - ./evolution_postgres:/var/lib/postgresql/data
-    env_file:
-      - db.env
-    
