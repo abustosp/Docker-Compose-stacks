@@ -1,0 +1,24 @@
+services:
+
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: unless-stopped
+    environment:
+      GITLAB_ROOT_EMAIL: "admin@example.com"    # Cambiar por e-mail válido
+      GITLAB_ROOT_PASSWORD: "p4ssw0rd"          # Cambiar 
+      GITLAB_OMNIBUS_CONFIG: |
+        gitlab_rails['gitlab_shell_ssh_port'] = 2424
+    ports:
+      - '8200:80'
+      - '8443:443'
+      - '2424:22'
+    volumes:
+      - './gitlab/config:/etc/gitlab'
+      - './gitlab/logs:/var/log/gitlab'
+      - './gitlab/data:/var/opt/gitlab'
+    shm_size: '256m'
+    deploy:
+      resources:
+        limits:
+          memory: 6g
