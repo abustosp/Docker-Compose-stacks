@@ -1,0 +1,35 @@
+services:
+
+  n8n:
+    image: n8nio/n8n:latest
+    container_name: n8n
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    env_file:
+      - .env
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./local_files:/files
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: mariadb:latest
+    container_name: n8n-db
+    restart: unless-stopped
+    env_file:
+      - .env
+    volumes:
+      - ./db_data:/var/lib/mysql
+
+  redis:
+    image: redis:latest
+    container_name: n8n-redis
+    restart: unless-stopped
+    volumes:
+      - ./redis_storage:/data
+
+volumes:
+  n8n_data:
