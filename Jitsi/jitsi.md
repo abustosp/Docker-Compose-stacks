@@ -6,7 +6,7 @@ https://jitsi.github.io/handbook/docs...
 
 1. download jitsi latest
 #the version number may change, so be aware of that
-`sudo wget https://github.com/jitsi/docker-jitsi...`
+`sudo wget https://github.com/jitsi/docker-jitsi-meet/releases/...`
 
 2. extract file
 #the version number may change, so be aware of that
