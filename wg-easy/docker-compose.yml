@@ -3,12 +3,8 @@ services:
   wg-easy:
     image: ghcr.io/wg-easy/wg-easy
     container_name: wg-easy
-    environment:
-      - LANG=en
-      - WG_HOST=194.195.215.90
-      - PASSWORD=contraseña123
-      - PORT=51821
-      - WG_PORT=51820
+    env_file:
+      - .env
     volumes:
       - ~/.wg-easy:/etc/wireguard
     ports:
