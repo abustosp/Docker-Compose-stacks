@@ -1,0 +1,21 @@
+services:
+
+  filebrowser:
+    image: hurlenko/filebrowser:latest
+    container_name: filebrowser
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Madrid
+      - FB_BASEURL=/filebrowser
+    ports:
+      - "8200:8080"
+    volumes:
+      - ./fb-data:/data
+      - ./fb-config:/config
+      - ./music:/data/music
+      - ./movies:/data/movies
+      - ./photos:/data/photos
+    restart: unless-stopped
+
+# Usuario y Pass = admin
