@@ -1,36 +1,36 @@
-version: '3.3'
-
 services:
 
   odoo:
     image: odoo:latest
     container_name: odoo
     restart: unless-stopped
-    links:
-      - db:db    
     depends_on:
       - db
-    ports:
-      - "8200:8069"
     volumes:
       - odoo-data:/var/lib/odoo
       - ./config:/etc/odoo
       - ./addons:/mnt/extra-addons
+    networks:
+      - nginx_default
 
   db:
     image: postgres:14.0
     container_name: db
-    restart: unless-stopped       
+    restart: unless-stopped
     environment:
       - POSTGRES_DB=postgres
       - POSTGRES_PASSWORD=odoo
       - POSTGRES_USER=odoo
       - PGDATA=/var/lib/postgresql/data/pgdata
     volumes:
-      - db-data:/var/lib/postgresql/data
+      - ./db-data:/var/lib/postgresql/data
+    networks:
+      - nginx_default
+
+networks:
+  nginx_default:
+    external: true
 
 volumes:
   odoo-data:
-  db-data:    
-
       
