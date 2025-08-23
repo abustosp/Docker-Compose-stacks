@@ -2,7 +2,7 @@
 
 services:
 
-  app:
+  nginx:
     image: 'jc21/nginx-proxy-manager:latest'
     restart: unless-stopped
     container_name: nginx
