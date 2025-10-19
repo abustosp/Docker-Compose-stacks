@@ -49,3 +49,19 @@ for container_id in $containers; do
     echo "----------------------------------------"
 done
 ```
+
+## Agragar a .bashrc
+```
+# Alias Custom
+alias activar='source venv/bin/activate'
+alias actualizarContenedoresDocker='docker compose pull && docker compose up -d'
+alias dcu='docker compose up -d'
+alias dcub='docker compose up -d --build'
+alias dcubl='docker compose up -d --build && docker compose logs -ft'
+alias dcr='docker compose restart'
+alias dcrl='docker compose restart && docker compose logs -ft'
+alias dcl='docker compose logs -ft'
+alias dieliminar="docker rmi $(docker images -f 'dangling=true' -q)"
+alias dprune='docker builder prune'
+alias dlimpiar_imagenes_y_capas='dieliminar && pdune'
+```
