@@ -61,7 +61,7 @@ alias dcubl='docker compose up -d --build && docker compose logs -ft'
 alias dcr='docker compose restart'
 alias dcrl='docker compose restart && docker compose logs -ft'
 alias dcl='docker compose logs -ft'
-alias dieliminar="docker rmi $(docker images -f 'dangling=true' -q)"
+alias dieliminar='docker rmi $(docker images -f "dangling=true" -q)'
 alias dprune='docker builder prune'
-alias dlimpiar_imagenes_y_capas='dieliminar && pdune'
+alias dlimpiar_imagenes_y_capas='dieliminar && dprune'
 ```
