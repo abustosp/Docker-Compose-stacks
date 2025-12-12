@@ -1,0 +1,15 @@
+services:
+
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: cloudflared
+    restart: unless-stopped
+    environment:
+      - CLOUDFLARED_TOKEN=${CLOUDFLARED_TOKEN}
+    command:
+      - tunnel
+      - --no-autoupdate
+      - run
+      - --token
+      - ${CLOUDFLARED_TOKEN}
+
