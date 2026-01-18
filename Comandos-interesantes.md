@@ -54,6 +54,7 @@ done
 ```
 # Alias Custom
 alias activar='source venv/bin/activate'
+alias activar2='source .venv/bin/activate'
 alias actualizarContenedoresDocker='docker compose pull && docker compose up -d'
 alias dcu='docker compose up -d'
 alias dcd='docker compose down'
