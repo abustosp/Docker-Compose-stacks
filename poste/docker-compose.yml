@@ -8,3 +8,10 @@ services:
       - ./mail-data:/data
     environment:
       - HTTPS=ON
+      - TZ=America/Argentina/Buenos_Aires
+      - h=mail.ejemplo.com.ar # Dirección del servidor de mail hosting
+      #- HTTP_PORT=7080
+      #- HTTPS_PORT=7443
+      - DISABLE_CLAMAV=FALSE  # TRUE antivirus
+      - DISABLE_RSPAMD=FALSE  # TRUE antispam
+      - DISABLE_ROUNDCUBE=FALSE  # TRUE
