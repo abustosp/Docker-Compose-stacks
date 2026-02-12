@@ -68,4 +68,5 @@ alias dcl='docker compose logs -ft'
 alias dieliminar='docker rmi $(docker images -f "dangling=true" -q)'
 alias dprune='docker builder prune'
 alias dlimpiar_imagenes_y_capas='dieliminar && dprune'
+alias dbp='docker builder prune'
 ```
